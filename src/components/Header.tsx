@@ -2,7 +2,10 @@ import React from 'react'
 import { DarkModeToggle } from './DarkModeToggle'
 import Link from 'next/link'
 import { BookMarkedIcon, BookOpen } from 'lucide-react'
-import { SignedIn } from '@clerk/nextjs'
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import { Button } from './ui/button'
+import SearchInput from './SearchInput'
+// import { SignedIn } from '@clerk/nextjs'
 
 function Header() {
   return (
@@ -19,12 +22,14 @@ function Header() {
                             Learn Online
                         </span>
                     </Link>
+
+                    <SearchInput />
                 </div>
 
 
                 <div className="flex items-center space-x-2 md:space-x-4">
                     <nav>
-                        <SignedIn>
+                        {/* <SignedIn> */}
                             <Link
                                 prefetch={false}
                                 href="/my-courses"
@@ -34,9 +39,20 @@ function Header() {
                                 <BookMarkedIcon className='h-4 w-4' />
                                 <span className="hidden md:block">My Courses</span>
                             </Link>
-                        </SignedIn>
+                        {/* </SignedIn> */}
                     </nav>
                     <DarkModeToggle />
+
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn>
+
+                    <SignedOut>
+                        <SignInButton mode='modal'>
+                            <Button variant="outline">Sign In</Button>
+                        </SignInButton>
+                    </SignedOut>
+
                 </div>
             </div>
         </div>
